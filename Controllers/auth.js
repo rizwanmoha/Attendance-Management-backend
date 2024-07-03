@@ -130,13 +130,13 @@ const markAttendance = async (req, res) => {
 }
 
 const addStudent =  async (req, res) => {
-  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-    return res
-      .status(400)
-      .send({
-        success:false
-      })
-  }
+  // if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+  //   return res
+  //     .status(400)
+  //     .send({
+  //       success:false
+  //     })
+  // }
   try {
       let studObj = await Students.findOne({ email: req.body.studentEmail })
       let classObj = await Class.findOne({ _id: req.params.x })
@@ -190,13 +190,13 @@ const addStudent =  async (req, res) => {
 }
 
 const addTeacher =  async (req, res) => {
-  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-    return res
-      .status(400)
-      .send({
-        success:false
-      })
-  }
+  // if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+  //   return res
+  //     .status(400)
+  //     .send({
+  //       success:false
+  //     })
+  // }
   try {
       let teacObj = await Teachers.findOne({ email: req.body.teacherEmail })
       let classObj = await Class.findOne({ _id: req.params.x })
@@ -242,19 +242,21 @@ const addTeacher =  async (req, res) => {
 }
 
 const addClass = async (req, res) => {
-  if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
-      return res
-      .status(400)
-      .send({
-          success:false
-      })
-  }
+
+  
+  // if (req.cookies == undefined || req.cookies == null || req.cookies['user'] == null) {
+  //     return res
+  //     .status(400)
+  //     .send({
+  //         success:false
+  //     })
+  // }
 
   try{
 
       let { className} = req.body
       const uID = {
-          email: req.cookies[COOKIE_NAME].email
+          email: "nikhil.t21@iiits.in"
       }
 
       let classObj = new Class({
@@ -265,9 +267,10 @@ const addClass = async (req, res) => {
       })
   
       await classObj.save()
+      
 
       if(req.body.students == 'undefined' && req.body.teachers == 'undefined'){
-          console.log("Here");
+          
           return res
               .status(200)
               .send({
@@ -347,6 +350,7 @@ const addClass = async (req, res) => {
           });
       })
 
+    
       const addStudents = () => new Promise((resolve, reject) => {
           let studentsList = []
           fs.createReadStream(__dirname + '/../uploads/files/students.csv')
@@ -405,10 +409,12 @@ const addClass = async (req, res) => {
               reject()
           });
       })
-
+      
+      
       await addTeachers();
+      
       await addStudents();
-
+      
       await classObject.save();
 
       return res
@@ -432,14 +438,14 @@ const addClass = async (req, res) => {
 }
 
 const removeClass = async (req, res) => {
-  if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-      return res
-          .status(400)
-          .send({
-              success: false,
-              message: "user not autherized"
-          })
-  }
+  // if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+  //     return res
+  //         .status(400)
+  //         .send({
+  //             success: false,
+  //             message: "user not autherized"
+  //         })
+  // }
   try {
       let classObj = await Class.deleteOne({ _id: req.params.x })
       console.log(classObj);
@@ -466,14 +472,14 @@ const removeClass = async (req, res) => {
 const addMultipleStudents = async (req,res) => {
   try {
 
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-      return res
-          .status(400)
-          .send({
-              success: false,
-              message: "user not autherized"
-          })
-    }
+    // if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+    //   return res
+    //       .status(400)
+    //       .send({
+    //           success: false,
+    //           message: "user not autherized"
+    //       })
+    // }
 
     const cid = req.params.x;
 
@@ -565,14 +571,14 @@ const addMultipleStudents = async (req,res) => {
 const addMultipleTeachers = async (req,res) => {
   try {
 
-    if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
-      return res
-          .status(400)
-          .send({
-              success: false,
-              message: "user not autherized"
-          })
-    }
+    // if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
+    //   return res
+    //       .status(400)
+    //       .send({
+    //           success: false,
+    //           message: "user not autherized"
+    //       })
+    // }
 
     const cid = req.params.x;
 

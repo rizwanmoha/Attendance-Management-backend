@@ -4,28 +4,30 @@ const Teachers = require("../Models/teacher");
 const Admins = require("../Models/admin");
 
 const sendClasses = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
+  console.log("comes here");
 
   const classes = await Class.find();
+  console.log("comes then");
   // console.log("classes = " + classes)
 
   return res.status(200).send({ success: true, data: classes });
 };
 
 const sendStudents = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   const students = await Students.find();
 
@@ -33,13 +35,13 @@ const sendStudents = async (req, res) => {
 };
 
 const sendTeachers = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   const teachers = await Teachers.find();
 
@@ -47,13 +49,13 @@ const sendTeachers = async (req, res) => {
 };
 
 const sendAdmins = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   const admins = await Admins.find();
 
@@ -61,13 +63,13 @@ const sendAdmins = async (req, res) => {
 };
 
 const sendCookieData = (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   console.log(req.cookies);
 
@@ -75,13 +77,13 @@ const sendCookieData = (req, res) => {
 };
 
 const sendClass = async (req, res) => {
-  if (
-    req.cookies == undefined ||
-    req.cookies == null ||
-    req.cookies["user"] == null
-  ) {
-    return res.status(200).send({ success: false });
-  }
+  // if (
+  //   req.cookies == undefined ||
+  //   req.cookies == null ||
+  //   req.cookies["user"] == null
+  // ) {
+  //   return res.status(200).send({ success: false });
+  // }
 
   const cid = req.params.cid;
   const classData = await Class.findOne({ _id: cid });

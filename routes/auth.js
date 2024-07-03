@@ -196,6 +196,7 @@ router.post("/addTeacher/:x",authController.addTeacher)
 
 router.post("/addClass",cpUpload, authController.addClass)
 
+
 router.get('/removeClass/:x',authController.removeClass)
 
 router.post("/addStudents/:x",stdUpload,authController.addMultipleStudents)
