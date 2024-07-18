@@ -15,12 +15,12 @@ const generateQrCode = async (req, res) => {
       let studClass = classObj.students;
       let d = new Date();
       let timeStr1 = `${Math.floor(d.getTime() / (1000 * 60))}`;
-      // let timeStr1 = `${Math.floor(d.getTime()/(1000*60*60))}`
+      
       let timeStr2 = `${Math.floor(d.getTime() / (1000 * 60)) + 5}`;
-      // let timeStr2 = `${Math.floor(d.getTime()/(1000*60*60)) + 1}`
+      
       let dateStr = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
       let arr = [];
-      // Adding Absent array
+      
       for (let i = 0; i < studClass.length; i++) {
         let tempObj = {
           roll_no: studClass[i].roll_number,
@@ -48,7 +48,7 @@ const generateQrCode = async (req, res) => {
         }
       }
       if (!matchFound) {
-        // Generating Qr Unique String
+        
         studClass.forEach((std) => {
           let roll = std.roll_number;
           let qrStr = `${roll}%%${req.params.x}%%${dateStr}%%${timeStr1}`;
@@ -118,7 +118,7 @@ const markAttendance = async (req, res) => {
       })
 
   } catch (error) {
-    console.log("Mark Attendace Error");
+    
     console.log(error);
 
     return res
