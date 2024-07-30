@@ -34,18 +34,18 @@ const addAdmin = async (req, res) => {
     //     admin_password
     // })
 
-    let encryptedPassword = String(await encryption.encrypt(password))
-    if (!(await encryption.comparePasswords(req.cookies[COOKIE_NAME].password, admin_password))) {
-        return res
-            .status(500)
-            .send({
-                success: false
-            })
-    }
+    // let encryptedPassword = String(await encryption.encrypt(password))
+    // if (!(await encryption.comparePasswords(req.cookies[COOKIE_NAME].password, admin_password))) {
+    //     return res
+    //         .status(500)
+    //         .send({
+    //             success: false
+    //         })
+    // }
     const registerAdmin = new Admin({
         name: full_name,
         email,
-        password: encryptedPassword
+        password: admin_password
     })
     const registeredAdmin = await registerAdmin.save()
     console.log(registeredAdmin);

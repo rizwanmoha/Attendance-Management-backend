@@ -73,7 +73,7 @@ const sendCookieData = (req, res) => {
 
   console.log(req.cookies);
 
-  return res.status(200).send({ success: true, data: req.cookies });
+  return res.status(200).send({ success: true, data: "" });
 };
 
 const sendClass = async (req, res) => {

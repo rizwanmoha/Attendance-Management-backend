@@ -23,14 +23,11 @@ const authRoutes = require("./routes/auth");
 
 const cors = require("cors");
 app.use(cors());
-// app.use(
-//   cors({
-//     origin: ["https://group-27.netlify.app/", "http://localhost:3000/", "http://localhost:5000"],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type'],
-//     credentials: true
-//   })
-// );
+
+// app.use(cors({
+//   origin: 'http://localhost:3000', 
+//   credentials: true
+// }));
 
 app.use(function (req, res, next) {
   //Enabling CORS

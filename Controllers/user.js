@@ -6,6 +6,10 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const COOKIE_NAME = 'user'
 const encryption = require('../public/scripts/encryption')
+const JWT = require("jsonwebtoken");
+require('dotenv').config();
+
+
 
 // const showDashboard = (req, res) => {
 //     if (req.cookies == undefined || req.cookies == null || req.cookies[COOKIE_NAME] == null) {
@@ -107,26 +111,28 @@ const login = async (req, res) => {
         let student = await Student.findOne({ email })
         let teacher = await Teacher.findOne({ email })
         let admin = await Admin.findOne({ email })
-
+        console.log(process.env.JWT_SECRET);
         if (student != null) {
             let isValid = await encryption.comparePasswords(student.password, password)
             if (isValid) {
-                let studentCookie = {
-                    name: student.name,
-                    email: student.email,
-                    roll_number: student.roll_number,
-                    password: student.password,
-                    userType: "student",
-                    __v: student.__v
-                }
-                res.cookie(COOKIE_NAME, studentCookie)
+                
+
+                const token = await JWT.sign(
+                    { id: student._id, role: 'user' },
+                    process.env.JWT_SECRET,
+                    {
+                      expiresIn: "7d",
+                    }
+                  );
 
                 return res
                     .status(200)
                     .send({
                         success: true,
                         message: "Login successful",
-                        data: studentCookie
+                        user: student,
+                        token,
+                        role : "user"
                     })
             } else {
                 return res
@@ -140,21 +146,22 @@ const login = async (req, res) => {
         else if (teacher != null) {
             let isValid = await encryption.comparePasswords(teacher.password, password)
             if (isValid) {
-                let teacherCookie = {
-                    name: teacher.name,
-                    email: teacher.email,
-                    password: teacher.password,
-                    userType: "teacher",
-                    __v: teacher.__v
-                }
-                res.cookie(COOKIE_NAME, teacherCookie)
+                const token = await JWT.sign(
+                    { id: teacher._id, role: 'teacher' },
+                    process.env.JWT_SECRET,
+                    {
+                      expiresIn: "7d",
+                    }
+                  );
 
                 return res
                     .status(200)
                     .send({
                         success: true,
                         message: "Login successful",
-                        data: teacherCookie
+                        user: teacher,
+                        token,
+                        role : "teacher"
                     })
             } else {
                 
@@ -167,25 +174,25 @@ const login = async (req, res) => {
             }
         } 
         else if (admin != null) {
-            // let isValid = await encryption.comparePasswords(admin.password, password)
+            
             let isValid = true;
             if (isValid) {
-                let adminCookie = {
-                    name: admin.name,
-                    email: admin.email,
-                    roll_number: admin.roll_number,
-                    password: admin.password,
-                    userType: "admin",
-                    __v: admin.__v
-                }
-                res.cookie(COOKIE_NAME, adminCookie)
-
+                
+                const token = await JWT.sign(
+                    { id: admin._id, role: 'admin' },
+                    process.env.JWT_SECRET,
+                    {
+                      expiresIn: "7d",
+                    }
+                  );
                 return res
                     .status(200)
                     .send({
                         success: true,
                         message: "Login successful",
-                        data: adminCookie
+                        user: admin,
+                        token,
+                        role : "admin"
                     })
             } else {               
                 return res
